@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %} Personal Info {% endblock %}
+
+{% block navigation %}
+<!-- Left navbar links -->
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+
+</ul>
+{% endblock %}
+
+
+{% block header %}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Persons</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Blank Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">List of Persons</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered table-striped" id="example1">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Profile</th>
+                    <th>PID</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                data-target="#modal-l">
+                            <i class="far fa-plus-square"> </i>
+                            New
+                        </button>
+                        <a href="{{ url_for('profile.print', id='all') }}" class="btn btn-sm btn-primary"><i
+                                class="fas fa-print"></i> Print</a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for person in persons %}
+                <tr>
+                    <td>{{ person.id }}</td>
+                    <td>
+                        <img alt="..."
+                             src="{{ url_for('static', filename=person.pimg) }}"
+                             class="img-fluid img-square">
+                    </td>
+                    <td>{{ person.pid }}</td>
+                    <td>{{ person.lname }}</td>
+                    <td>{{ person.fname }}</td>
+                    {% if utype == "Administrator" %}
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-primary"
+                               href="{{ url_for('profile.index', id=person.id) }}">
+                                <i class="far fa-eye"></i> View
+                            </a>
+                            <a class="btn btn-sm btn-danger"
+                               href="{{ url_for('persons.delete', id=person.id) }}">
+                                <i class="far fa-minus-square"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-sm btn-primary"
+                               href="{{ url_for('profile.index', id=person.id) }}">
+                                <i class="far fa-eye"></i> View
+                            </a>
+                        </div>
+                    </td>
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Profile</th>
+                    <th>PID</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                data-target="#modal-l">
+                            <i class="far fa-plus-square"> </i>
+                            New
+                        </button>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    <div class="modal fade" id="modal-l">
+        <div class="modal-dialog modal-l">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Personal Information Form</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Profile Image</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="Profile Image"
+                                                   id="exampleInputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" id="InputFirstName"
+                                           placeholder="Enter first name" name="First Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="Text" class="form-control" id="InputLastName"
+                                           placeholder="Enter last name" name="Last Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    <input type="number" class="form-control" id="InputAge"
+                                           placeholder="Enter age" name="Age">
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select class="custom-select" placeholder="Select gender" name="Gender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Birth Date</label>
+                                    <input type="text" class="form-control" id="InputBirthDate"
+                                           placeholder="MM/DD/YYYY" name="Birth Date">
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label>Email address</label>
+                                    <input type="email" class="form-control" id="InputEmail" placeholder="Enter email"
+                                           name="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Phone No.</label>
+                                    <input type="text" class="form-control" id="InputPhoneNo"
+                                           placeholder="AreaCode + Landline No" name="Phone No.">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cell No.</label>
+                                    <input type="text" class="form-control" id="InputCellNo"
+                                           placeholder="AreaCode + 11 Digit No." name="Cell No.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" id="InputAddress"
+                                           placeholder="Subdivision / Street / City / Province" name="Address">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Person</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="float-right d-none d-sm-block">
+    <b>Version</b> 3.0.5
+</div>
+<strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+reserved.
+</footer>
+{% endblock %}
+
+
+
+

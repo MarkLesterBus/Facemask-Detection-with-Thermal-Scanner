@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Print</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css') }}">
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            {% if id == 'all' %}
+            {% for p in person %}
+            <div class="invoice col-md-7 p-3" style="border: 1px solid black">
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-12">
+                        <h4>
+                            <i class="fas fa-user"></i> {{ p.fname }} {{ p.lname }}
+                        </h4>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- info row -->
+                <div class="row invoice-info">
+                    <div class="col-sm-5 invoice-col">
+                        <img alt="..." src="{{ url_for('static', filename=p.path) }}"
+                             class="img-fluid">
+                    </div>
+                    <div class="col-sm-7 invoice-col">
+                        From
+                        <address>
+                            <strong> {{ p.address }}</strong><br>
+                            Email: {{ p.email }}<br>
+                            Phone#: {{ p.phone_no }}<br>
+                            Cell#: {{ p.cell_no }}<br>
+
+                        </address>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <br>
+            {% endfor %}
+            {% else %}
+             <div class="invoice col-md-7 p-3" style="border: 1px solid black">
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-12">
+                        <h4>
+                            <i class="fas fa-user"></i> {{ person.fname }} {{ person.lname }}
+                        </h4>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- info row -->
+                <div class="row invoice-info">
+                    <div class="col-sm-5 invoice-col">
+                        <img alt="..." src="{{ url_for('static', filename=person.path) }}"
+                             class="img-fluid">
+                    </div>
+                    <div class="col-sm-7 invoice-col">
+                        From
+                        <address>
+                            <strong> {{ person.address }}</strong><br>
+                            Email: {{ person.email }}<br>
+                            Phone#: {{ person.phone_no }}<br>
+                            Cell#: {{ person.cell_no }}<br>
+
+                        </address>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+
+</div>
+
+</body>
+</html>
+
+
+
+
+

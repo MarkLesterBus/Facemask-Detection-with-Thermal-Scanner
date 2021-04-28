@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %} Test {% endblock %}
+
+{% block navigation %}
+<!-- Left navbar links -->
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="/admin" class="nav-link">Home</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+    </li>
+</ul>
+
+{% endblock %}
+
+
+{% block header %}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Accounts</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Persons</a></li>
+                    <li class="breadcrumb-item active">Accounts</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+{% endblock %}
+
+{% block content %}
+<!-- Default box -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Update Account</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form class="form-horizontal" method="post">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" id="InputFirstName"
+                                           placeholder="Enter username" name="Username" value="{{ account.uname }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" id="InputLastName"
+                                           placeholder="Enter password" name="Password" value="{{ account.pword }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>User-type</label>
+                                    <select class="custom-select" placeholder="Select User-type" name="Utype" value="{{ account.utype }}">
+                                        <option>Administrator</option>
+                                        <option>Staff</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="form-group row">
+
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('profile.index', id=id)}}" class="btn btn-default float-left">Back</a>
+                        <button type="submit" class="btn btn-primary float-right">
+                            <i class="far fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                    <!-- /.card-footer -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /.card -->
+{% endblock %}
+
+{% block footer %}
+<div class="float-right d-none d-sm-block">
+    <b>Version</b> 3.0.5
+</div>
+<strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+reserved.
+</footer>
+{% endblock %}
+
+
+
+
